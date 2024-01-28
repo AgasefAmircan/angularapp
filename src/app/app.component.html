@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <h3 class="bg-primary text-white p-3">{{ name }}</h3>
+      <div class="input-group">
+        <input type="text" class="form-control"  #todoText/>
+        <div class="input-group-append">
+          <button class="btn btn-primary" (click)="addItem(todoText.value);todoText.value=''">Add</button>
+        </div>
+      </div>
+      <div class="custom-control custom-checkbox my-3">
+        <input type="checkbox" class="custom-control-input mx-2">
+        <label for="displayAll" class="custom-control-label" id="displayAll" ngModel="isDisplay">Display All</label>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Actions</th>
+            <th>Completed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of items; let index = index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ i.description }}</td>
+            <td><input type="checkbox" [(ngModel)]="i.completed"/></td>
+            <td>
+              <button class="btn btn-danger">{{ i.action }}</button>
+            </td>
+            <td [ngSwitch]="i.completed">
+              <tr *ngSwitchCase="true">
+                Yes
+              </tr>
+              <tr *ngSwitchCase="false">
+                No
+              </tr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
